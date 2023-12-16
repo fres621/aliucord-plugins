@@ -1,4 +1,4 @@
-package com.github.fres621
+package com.github.fres621.aliucord
 
 import android.content.Context
 import com.aliucord.annotations.AliucordPlugin
