@@ -1,6 +1,7 @@
 package com.github.fres621.aliucord
 
 import android.content.Context
+import android.view.View
 import com.aliucord.annotations.AliucordPlugin
 import com.aliucord.entities.MessageEmbedBuilder
 import com.aliucord.entities.Plugin
@@ -17,14 +18,14 @@ class MyFirstPatch : Plugin() {
     override fun start(context: Context) {
         val itemMessage = WidgetChatListAdapterItemMessage::class.java
         val itemAvatarField = itemMessage.getDeclaredField("itemAvatar").apply { isAccessible = true }
-        unpatchChatRadialStatus = patcher.patch(
+        patcher.patch(
             itemMessage.getDeclaredMethod("onConfigure", Int::class.javaPrimitiveType, ChatListEntry::class.java),
             Hook {
                 val itemAvatar = itemAvatarField[it.thisObject] as View? ?: return@Hook
-                val entry = it.args[1] as MessageEntry
-
-                itemAvatar.setPadding(12, 12, 12, 12)
-                itemAvatar.background = null
+                itemAvatar.apply {
+                    setPadding(12, 12, 12, 12)
+                    background = null
+                }
             }
         )
     }
