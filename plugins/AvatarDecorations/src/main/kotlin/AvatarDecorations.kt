@@ -23,7 +23,7 @@ class MyFirstPatch : Plugin() {
             Hook {
                 val itemAvatar = itemAvatarField[it.thisObject] as View? ?: return@Hook
                 itemAvatar.apply {
-                    setPadding(12, 12, 12, 12)
+                    setPadding(10, 12, 12, 12)
                     background = null
                 }
             }
